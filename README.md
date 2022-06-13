@@ -1,3 +1,16 @@
+## Table of contents
+
+- [Terraform](#terraform)
+    - [Terraform Basic](#terraform-basics)
+        - [Terraform Blocks](#terraform-blocks)
+            - [Provider](#provider)
+            - [Resource](#resource)
+            - [Additional blocks](#additional-blocks)
+                - [Input variables](#input-variables)
+                - [local values](#local-values)
+    - [Installation](#installation)
+        - [Window](#window)
+
 # Terraform
 
 HashiCorp Terraform is an infrastructure as code tool that lets you define both cloud and on-prem resources in human-readable configuration files that you can version, reuse, and share. You can then use a consistent workflow to provision and manage all of your infrastructure throughout its lifecycle. Terraform can manage low-level components like compute, storage, and networking resources, as well as high-level components like DNS entries and SaaS features.
@@ -31,7 +44,7 @@ resource "google_compute_network" "vpc_network" {
 }
 ```
 
-### Terraform Block
+### Terraform Blocks
 
 Terraform is consist of `terraform {}` that contain terraform setting required to provision your infrastructure.
 
@@ -49,7 +62,7 @@ terraform {
 - For each, provider need the `source` variable to defines an optional hostname, a namespace, and the provider type which came from this [Terraform Registry](https://registry.terraform.io/) 
 - `version` is optional but you can also specify the version you satisfied with.
 
-### Provider
+#### Provider
 
 ```
 provider "google" {
@@ -64,7 +77,7 @@ provider "google" {
 - The provider block configures the specified provider, in this repo we talked about `gcp`.
 - you can also have multiple provider in one terraform such as `aws`, `azure`.
 
-### Resource
+#### Resource
 
 Use resource blocks to define components of your infrastructure. A resource might be a physical component such as a server, or it can be a logical resource such as a Heroku application.
 
@@ -79,7 +92,7 @@ In the code block we have:
 - resource name: `vpc_network`
 - The ID of network: `google_compute_network.vpc_network`
 
-### Additional blocks
+#### Additional blocks
 
 this would be in `variable.tf`
 
