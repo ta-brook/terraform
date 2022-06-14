@@ -156,3 +156,12 @@ zone = local.zone
 3. add `C:/terraform/` to your path environment
 4. open terminal
 5. type `terraform -version`
+
+
+
+Main commands:
+  init          Prepare your working directory for other commands
+  validate      Check whether the configuration is valid
+  plan          Show changes required by the current configuration
+  apply         Create or update infrastructure
+  destroy       Destroy previously-created infrastructure
