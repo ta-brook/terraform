@@ -10,12 +10,16 @@
                 - [local values](#local-values)
     - [Installation](#installation)
         - [Window](#window)
+    - [Usage](#usage)
+        - [GCP](#gcp-infrastructure)
+        - [Run your first terraform](#run-your-first-terraform)
+    - [Main terraform command](#main-commands)
 
 # Terraform
 
-HashiCorp Terraform is an infrastructure as code tool that lets you define both cloud and on-prem resources in human-readable configuration files that you can version, reuse, and share. You can then use a consistent workflow to provision and manage all of your infrastructure throughout its lifecycle. Terraform can manage low-level components like compute, storage, and networking resources, as well as high-level components like DNS entries and SaaS features.
+[HashiCorp Terraform](https://www.terraform.io/intro) is an open source [infrastructure as code (IaC)](https://en.wikipedia.org/wiki/Infrastructure_as_code) software tool that allows Developer to provision infrastructure resources as a code.
 
-![terraform workflow](/terraform_assets/terraform_assets.png)
+![terraform workflow](/assets/terraform_assets.png)
 
 ## Terraform Basics
 
@@ -157,11 +161,52 @@ zone = local.zone
 4. open terminal
 5. type `terraform -version`
 
+## Usage
 
+### GCP infrastructure
 
-Main commands:
-  init          Prepare your working directory for other commands
-  validate      Check whether the configuration is valid
-  plan          Show changes required by the current configuration
-  apply         Create or update infrastructure
-  destroy       Destroy previously-created infrastructure
+- Create `main.tf` file that contain terraform blocks as below. For other blocks you can specified how many service you want and what it's gonna look like. Example: my [main.tf](terraform/main.tf)
+```
+terraform {
+  required_version = ">= 1.0"
+  backend "local" {}
+  required_providers {
+    google = {
+      source  = "hashicorp/google"
+    }
+  }
+}
+```
+- Set all your `variable.tf` the way you want. Example: my [variable.tf](terraform/variable.tf)
+
+### Run your first terraform!
+
+- Running this command will download other plugin to connect with GCP to `/terraform`
+```
+terraform init
+```
+
+- Running this command will activate `main.tf` and create example of how your infrastructure look like!
+```
+terraform plan
+```
+
+- Running this command will apply everything that `terraform plan` tell you to your GCP project
+```
+terraform apply
+```
+
+- Running this command will destroy everything that `terraform plan` described and `terraform apply` created. So, please make sure to destroy it if you not gonna use it yet.
+```
+terraform destroy
+```
+
+*note: If you follow my code in `variable.tf` project_id didn't defined. So you have to define it yourself in terminal when run something like `terraform apply`*
+
+## Main commands:
+- `init`          Prepare your working directory for other commands
+- `validate`      Check whether the configuration is valid
+- `plan`          Show changes required by the current configuration
+- `apply`         Create or update infrastructure
+- `destroy`       Destroy previously-created infrastructure
+
